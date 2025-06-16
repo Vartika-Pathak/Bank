@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Transaction History</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #e0eafc, #cfdef3);
+            margin: 0;
+            padding: 40px;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            max-width: 900px;
+            margin: auto;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        input[type="text"], select {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            width: 200px;
+        }
+
+        button {
+            padding: 12px 24px;
+            background-color: #4a69bd;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3b5998;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 14px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background-color: #f5f6fa;
+            color: #333;
+        }
+
+        tr:hover {
+            background-color: #f0f8ff;
+        }
+
+        .no-transactions {
+            text-align: center;
+            color: #777;
+            font-style: italic;
+            margin-top: 20px;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 35px;
+            text-decoration: none;
+            background-color: #6c5ce7;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            transition: background 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: #4834d4;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Transaction History</h2>
+
+    <form th:action="@{/transactions}" method="get">
+        <select name="type">
+            <option value="">All</option>
+            <option value="DEPOSIT">Deposit</option>
+            <option value="WITHDRAW">Withdraw</option>
+        </select>
+        <input type="text" name="date" placeholder="YYYY-MM-DD (optional)" />
+        <button type="submit">Filter</button>
+    </form>
+
+    <div th:if="${transactions.size() == 0}">
+        <p class="no-transactions">No transactions found.</p>
+    </div>
+
+    <table th:if="${transactions.size() > 0}">
+        <thead>
+        <tr>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Balance</th>
+            <th>Timestamp (UTC)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="txn : ${transactions}">
+            <td th:text="${txn.type}"></td>
+            <td th:text="${txn.amount}"></td>
+            <td th:text="${txn.balance}"></td>
+            <td th:text="${txn.timestamp}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/dashboard" class="back-link">Back to Dashboard</a>
+</div>
+</body>
+</html>

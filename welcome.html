@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome to Banking System</title>
+    <style>
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(to right, #e0f7fa, #e1f5fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            text-align: center;
+            width: 420px;
+        }
+
+        .logo {
+            width: 80px;
+            animation: float 3s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 26px;
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        button {
+            padding: 12px 30px;
+            margin: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .login {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .login:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        .register {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .register:hover {
+            background-color: #1976d2;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135706.png" alt="Bank Logo" class="logo">
+    <h2>Welcome to the Banking System</h2>
+    <p>Select an option to continue:</p>
+    <form action="/login" method="get">
+        <button class="login">Login</button>
+    </form>
+    <form action="/register" method="get">
+        <button class="register">Register</button>
+    </form>
+</div>
+</body>
+</html>

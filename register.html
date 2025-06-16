@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: #eef2f3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .message {
+            color: red;
+            font-weight: bold;
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007BFF;
+        }
+    </style>
+
+    <script>
+        function validateForm(event) {
+            const name = document.forms["registerForm"]["name"].value;
+            const age = document.forms["registerForm"]["age"].value;
+            const password = document.forms["registerForm"]["password"].value;
+            const confirmPassword = document.forms["registerForm"]["confirmPassword"].value;
+
+            const namePattern = /^[A-Za-z\s]+$/;
+            const agePattern = /^[0-9]+$/;
+
+            if (!namePattern.test(name)) {
+                alert("Name must only contain alphabets and spaces.");
+                event.preventDefault();
+                return false;
+            }
+
+            if (!agePattern.test(age) || parseInt(age) < 18) {
+                alert("Age must be a number 18 or above.");
+                event.preventDefault();
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                event.preventDefault();
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h2>Register Account</h2>
+    <form name="registerForm" th:action="@{/register}" method="post" onsubmit="return validateForm(event)">
+        <input type="text" name="name" placeholder="Full Name" required /><br>
+        <input type="text" name="username" placeholder="Username" required /><br>
+        <input type="number" name="age" placeholder="Age" required /><br>
+        <input type="password" name="password" placeholder="Password" required /><br>
+        <input type="password" name="confirmPassword" placeholder="Confirm Password" required /><br>
+        <button type="submit">Register</button>
+    </form>
+
+    <div class="message" th:text="${message}"></div>
+
+    <a href="/">Back to Welcome</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Deposit</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 400px;
+            color: #fff;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        input[type="number"] {
+            padding: 12px;
+            margin: 20px 0;
+            width: 90%;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        button {
+            padding: 12px 26px;
+            font-size: 16px;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #0072ff, #00c6ff);
+        }
+
+        .message {
+            color: #00ffb7;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 22px;
+            font-size: 14px;
+            text-decoration: none;
+            color: white;
+            border-radius: 30px;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            transition: background 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: linear-gradient(to right, #ff4b2b, #ff416c);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Deposit Funds</h2>
+    <form th:action="@{/deposit}" method="post">
+        <input type="number" name="amount" step="0.01" placeholder="Enter amount" required />
+        <br>
+        <button type="submit">Deposit</button>
+    </form>
+    <p class="message" th:text="${message}"></p>
+    <a href="/dashboard" class="back-link">Back to Dashboard</a>
+</div>
+</body>
+</html>
